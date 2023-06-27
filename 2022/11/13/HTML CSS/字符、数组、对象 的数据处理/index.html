@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="keywords" content="hexo, autumn" />
+    <title>
+        跑路博客
+    </title>
+    <!-- favicon -->
+    
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
+     
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- highlight -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad()
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
+
+    <script>
+        infiniteScroll()
+
+        window.addEventListener('DOMContentLoaded', function () {
+            const [
+                mainTitle,
+                mobileMenu,
+                mobileMainTitle,
+                mobileMenuBtn,
+                ipadMenuBtn,
+                aside,
+                closeBtn,
+            ] = getEle(
+                '#main-title',
+                '.mobile-menu',
+                '.mobile-menu h3',
+                '.mobile-menu button',
+                '.ipad-menu',
+                'aside',
+                'aside .close',
+            )
+            const io = new IntersectionObserver(entries => {
+                if (entries[0].intersectionRatio <= 0) {
+                    mobileMainTitle.classList.remove('invisibile')
+                } else {
+                    mobileMainTitle.classList.add('invisibile')
+                }
+            })
+            io.observe(mainTitle)
+
+            clickToggleAside(mobileMenuBtn)
+            clickToggleAside(ipadMenuBtn)
+            clickToggleAside(closeBtn, false)
+
+            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
+            if (isMenuVisible) document.body.style.background = 'none'
+
+            function getEle(...args) {
+                return args.map(arg => document.querySelector(arg))
+            }
+
+            function clickToggleAside(btn, show = true) {
+                btn.addEventListener('click', function () {
+                    if (show) {
+                        aside.style.display = 'block'
+                    } else {
+                        aside.style.display = 'none'
+                    }
+                })
+            }
+        })
+    </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+    <div class="container">
+        <header class="header">
+    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+        <h3 class="invisibile">
+            <a href="/" class="logo">
+                跑路博客
+            </a>
+        </h3>
+        <button class="menu">menu</button>
+    </nav>
+
+    <button class="ipad-menu menu">menu</button>
+
+    <h1 class="title" id="main-title">
+        <a href="/" class="logo">
+            跑路博客
+        </a>
+    </h1>
+    <h2 class="desc">
+        工地荔枝转行
+    </h2>
+
+    <div class="links">
+        <ul>
+            
+            <li>
+                <a target="_blank" rel="noopener" href="https://github.com/FrontendSophie">
+                    Github
+                </a>
+            </li>
+            
+            <li>
+                <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/frontendsophie/">
+                    LinkedIn
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</header>
+        <main class="main">
+            <article class="post">
+    
+    
+    
+    <h2 class="post-title">
+        字符、数组、对象 的数据处理
+    </h2>
+    <ul class="post-date">
+        <li>
+            2022-11-13
+        </li>
+        <li>
+            panmou
+        </li>
+    </ul>
+    <div class="post-content">
+        <h1 id="字符串的处理"><a href="#字符串的处理" class="headerlink" title="字符串的处理"></a>字符串的处理</h1><h4 id="indexof-x2F-lastIndexOf-最后一个"><a href="#indexof-x2F-lastIndexOf-最后一个" class="headerlink" title="indexof &#x2F;     lastIndexOf(最后一个)"></a>indexof &#x2F;     lastIndexOf(最后一个)</h4><p>判断一个字符第一次出现在某个字符串的索引,如果包含返回它的索引，如果不包含返回-1.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var str = &#x27;abcde&#x27;;</span><br><span class="line">console.log(str.indexOf(&#x27;e&#x27;));   //4</span><br></pre></td></tr></table></figure>
+<h4 id="substring-n-m"><a href="#substring-n-m" class="headerlink" title="substring(n,m)"></a>substring(n,m)</h4><p>从索引n开始，截取m个字符，将截取的字符返回，对原字符串没有任何改变</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str = &#x27;abcde&#x27;</span><br><span class="line">var bc = str.substring(1,3);</span><br><span class="line">console.log(bc);  //&quot;bc&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="split"><a href="#split" class="headerlink" title="split"></a>split</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str = &#x27;abcde&#x27;</span><br><span class="line">var a = str.split(&#x27;&#x27;);</span><br><span class="line">console.log(a);  //[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</span><br></pre></td></tr></table></figure>
+<h4 id="replace-‘a’-1"><a href="#replace-‘a’-1" class="headerlink" title="replace(‘a’,1)"></a>replace(‘a’,1)</h4><p>替换指定字符，返回替换后新的字符串，对原有字符串有改变(第一个参数可以是正则表达式) 只能替换一次 ，配合正则式修饰符g使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str=&#x27;aaaaee&#x27;;</span><br><span class="line">var reg=/a/g;</span><br><span class="line">console.log(str.replace(reg,1));   //&quot;1111ee&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="match"><a href="#match" class="headerlink" title="match()"></a>match()</h4><p>可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。把找到的字符放在数组里，返回一个数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str = &#x27;aaaa3ebbd33&#x27;;</span><br><span class="line">var reg = /a/g;</span><br><span class="line">console.log(str.match(reg));  //[&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;]</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="数组处理"><a href="#数组处理" class="headerlink" title="数组处理"></a>数组处理</h1><h4 id="toString-、toLocaleString-、valueOf-方法。其中toString-方法会返回由数组中每个值的字符串拼接而成的一个以逗号分隔的字符串，而调用valueOf-返回的还是数组"><a href="#toString-、toLocaleString-、valueOf-方法。其中toString-方法会返回由数组中每个值的字符串拼接而成的一个以逗号分隔的字符串，而调用valueOf-返回的还是数组" class="headerlink" title="toString()、toLocaleString()、valueOf()方法。其中toString()方法会返回由数组中每个值的字符串拼接而成的一个以逗号分隔的字符串，而调用valueOf()返回的还是数组"></a>toString()、toLocaleString()、valueOf()方法。其中toString()方法会返回由数组中每个值的字符串拼接而成的一个以逗号分隔的字符串，而调用valueOf()返回的还是数组</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let newList = [&#x27;orange&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;];</span><br><span class="line"> </span><br><span class="line">newList.toString() // &quot;orange,apple,banana&quot;</span><br><span class="line">newList.valueOf() // [&quot;orange&quot;, &quot;apple&quot;, &quot;banana&quot;]</span><br><span class="line">newList.toLocaleString() // &quot;orange,apple,banana&quot;</span><br><span class="line"> </span><br><span class="line">console.log(newList.toString()) // &quot;orange,apple,banana&quot;</span><br><span class="line">alert(newList.valueOf()) // &quot;orange,apple,banana&quot;</span><br><span class="line">console.log(newList.toLocaleString()) // &quot;orange,apple,banana&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="join-方法可以使用不同的分隔符"><a href="#join-方法可以使用不同的分隔符" class="headerlink" title="join() 方法可以使用不同的分隔符"></a>join() 方法可以使用不同的分隔符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let newList = [&#x27;orange&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;];</span><br><span class="line">console.log(newList.join(&#x27;|&#x27;)) // &quot;orange|apple|banana&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Array-from-方法用于将伪数组转为真正的数组"><a href="#Array-from-方法用于将伪数组转为真正的数组" class="headerlink" title="Array.from 方法用于将伪数组转为真正的数组"></a>Array.from 方法用于将伪数组转为真正的数组</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let arrayLike = &#123;</span><br><span class="line">    &#x27;0&#x27;: &#x27;a&#x27;,</span><br><span class="line">    &#x27;1&#x27;: &#x27;b&#x27;,</span><br><span class="line">    &#x27;2&#x27;: &#x27;c&#x27;,</span><br><span class="line">    length: 3</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// ES5的写法</span><br><span class="line">var arr1 = [].slice.call(arrayLike); // [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="line"> </span><br><span class="line">// ES6的写法</span><br><span class="line">let arr2 = Array.from(arrayLike); // [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="line"> </span><br><span class="line">Array.from([1, 2, 3])</span><br><span class="line">// [1, 2, 3] 如果参数是一个真数组，会返回一个一摸一样的新数组</span><br></pre></td></tr></table></figure>
+
+<h4 id="push-可以接受任意数量的参数，然后返回修改后的数组的长度。"><a href="#push-可以接受任意数量的参数，然后返回修改后的数组的长度。" class="headerlink" title="push 可以接受任意数量的参数，然后返回修改后的数组的长度。"></a>push 可以接受任意数量的参数，然后返回修改后的数组的长度。</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3, 4];</span><br><span class="line"> </span><br><span class="line">console.log(arr.push(5)); // 5</span><br><span class="line">console.log(arr.push([1, 2])); // 6</span><br><span class="line">console.log(arr); // [ 1, 2, 3, 4, 5, [ 1, 2 ] ]</span><br></pre></td></tr></table></figure>
+<h4 id="pop-可以从数组的末尾移除最后一项，减少数组的长度，返回删除项"><a href="#pop-可以从数组的末尾移除最后一项，减少数组的长度，返回删除项" class="headerlink" title="pop  可以从数组的末尾移除最后一项，减少数组的长度，返回删除项"></a>pop  可以从数组的末尾移除最后一项，减少数组的长度，返回删除项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3, 4];</span><br><span class="line">console.log(arr.pop()); // 4</span><br><span class="line">console.log(arr); // [1, 2, 3, ]</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Great_Zhou/article/details/112234716">更多更全的数组处理方法</a></p>
+<h1 id="对象处理方法"><a href="#对象处理方法" class="headerlink" title="对象处理方法"></a>对象处理方法</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44247511/article/details/120881680">对象处理方法</a></p>
+
+    </div>
+</article>
+        </main>
+        <aside class="aside">
+            <div class="close"></div>
+            <section class="aside-section">
+                
+    <h1>Categories</h1>
+
+    
+
+            </section>
+            <section class="aside-section">
+                
+    <h1>Archives</h1>
+
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li></ul>
+
+
+            </section>
+            <section class="aside-section tag">
+                
+    <h1>Tags</h1>
+
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a></li></ul>
+
+            </section>
+        </aside>
+    </div>
+</body>
+
+</html>
